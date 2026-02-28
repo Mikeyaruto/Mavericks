@@ -17,20 +17,24 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '16'
-          
+
       - name: Install dependencies
         working-directory: frontend
         run: npm install --legacy-peer-deps
-        
+
+      - name: Fix ajv
+        working-directory: frontend
+        run: npm install ajv@^8 --legacy-peer-deps
+
       - name: Build React app
         working-directory: frontend
         run: npm run build
-        
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
