@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Typewriter } from 'react-simple-typewriter';
-import { ArrowRight, CheckCircle, Code, Workflow, MessageSquare, Phone, Server, Briefcase, Facebook, Twitter } from 'lucide-react';
+import { ArrowRight, CheckCircle, Code, Workflow, MessageSquare, Phone, Server, Briefcase, Facebook, Twitter, Linkedin } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import ParticleBackground from '../components/ParticleBackground';
@@ -136,6 +136,14 @@ const Home = () => {
                 {/* Social Links */}
                 <div className="flex items-center space-x-4">
                   <span className="text-slate-400 text-sm">Connect:</span>
+                  <a 
+                    href="https://www.linkedin.com/in/egbeneye-michael-294623334?utm_source=share_via&utm_content=profile&utm_medium=member_android" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-slate-300 hover:text-blue-500 transition-colors"
+                  >
+                    <Linkedin size={24} />
+                  </a>
                   <a 
                     href="https://web.facebook.com/profile.php?id=61574655868703" 
                     target="_blank" 

@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, Linkedin, Twitter, Facebook, Briefcase } from 'lucide-react';
+import { Mail, Phone, Linkedin, Twitter, Facebook, Briefcase, AlertCircle, TrendingUp, Zap } from 'lucide-react';
 
 const Footer = () => {
   const socialLinks = [
+    { icon: Linkedin, url: 'https://www.linkedin.com/in/egbeneye-michael-294623334?utm_source=share_via&utm_content=profile&utm_medium=member_android', label: 'LinkedIn', color: 'hover:text-blue-600' },
     { icon: Facebook, url: 'https://web.facebook.com/profile.php?id=61574655868703', label: 'Facebook', color: 'hover:text-blue-500' },
     { icon: Twitter, url: 'https://x.com/mikeyaruto09', label: 'Twitter/X', color: 'hover:text-sky-400' },
-    { icon: Linkedin, url: '#', label: 'LinkedIn', color: 'hover:text-blue-600' },
   ];
 
   const fiverrUpworkLinks = [
@@ -15,12 +15,43 @@ const Footer = () => {
     { name: 'Upwork Profile 2', url: 'https://www.upwork.com/freelancers/~01472af65f6ce54a96', color: 'bg-green-600 hover:bg-green-700' },
   ];
 
+  // Client Pain Points - What I Fix
+  const painPoints = [
+    { icon: AlertCircle, problem: 'Losing Sales?', solution: 'I build fast Shopify stores that convert visitors into customers' },
+    { icon: Zap, problem: 'Wasting Time?', solution: 'My n8n automations eliminate repetitive tasks and save 15+ hours/week' },
+    { icon: TrendingUp, problem: 'Missing Leads?', solution: 'AI chatbots & voice agents capture every opportunity 24/7' },
+  ];
+
   return (
     <footer className="relative bg-gradient-to-b from-slate-900 to-slate-950 text-slate-300">
       {/* Gradient top border */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        {/* Pain Points Section - Why Choose Me */}
+        <div className="mb-12">
+          <h3 className="text-white font-bold text-3xl mb-2 text-center">Struggling With These Problems?</h3>
+          <p className="text-cyan-400 text-center mb-8 text-lg">I Fix Them. Here's How:</p>
+          <div className="grid md:grid-cols-3 gap-6">
+            {painPoints.map((point, index) => {
+              const Icon = point.icon;
+              return (
+                <div key={index} className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 hover:border-cyan-500 transition-all duration-300">
+                  <div className="flex items-start space-x-3">
+                    <div className="bg-red-500/20 rounded-lg p-2">
+                      <Icon className="text-red-400" size={24} />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-semibold mb-2">{point.problem}</h4>
+                      <p className="text-slate-400 text-sm">{point.solution}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
         {/* Freelance Platform Links */}
         <div className="mb-12 text-center">
           <h3 className="text-white font-bold text-2xl mb-6">Hire Me On:</h3>
@@ -52,30 +83,60 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Quick Links */}
+          {/* Quick Links - Client-Focused */}
           <div>
             <h4 className="text-white font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              {['Services', 'Portfolio', 'Reviews', 'About'].map((item) => (
-                <li key={item}>
-                  <Link 
-                    to={`/${item.toLowerCase()}`} 
-                    className="text-sm hover:text-cyan-400 transition-colors inline-block hover:translate-x-1 transform duration-200"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link to="/services" className="text-sm hover:text-cyan-400 transition-colors inline-block hover:translate-x-1 transform duration-200">
+                  See What I Can Build For You
+                </Link>
+              </li>
+              <li>
+                <Link to="/portfolio" className="text-sm hover:text-cyan-400 transition-colors inline-block hover:translate-x-1 transform duration-200">
+                  Real Results I've Delivered
+                </Link>
+              </li>
+              <li>
+                <Link to="/reviews" className="text-sm hover:text-cyan-400 transition-colors inline-block hover:translate-x-1 transform duration-200">
+                  What Clients Say About Me
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className="text-sm hover:text-cyan-400 transition-colors inline-block hover:translate-x-1 transform duration-200">
+                  Why Work With Me
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="text-sm hover:text-cyan-400 transition-colors inline-block hover:translate-x-1 transform duration-200">
+                  Start Your Project Now
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Services - Pain Point Focused */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Services</h4>
+            <h4 className="text-white font-semibold mb-4">I Solve These Problems</h4>
             <ul className="space-y-2">
-              {['Shopify Design', 'n8n Automation', 'AI Chatbots', 'AI Voice Agents', 'VPS Deployment'].map((service) => (
-                <li key={service} className="text-sm text-slate-400">{service}</li>
-              ))}
+              <li className="text-sm text-slate-400">
+                <span className="text-cyan-400">→</span> Slow, ugly Shopify stores
+              </li>
+              <li className="text-sm text-slate-400">
+                <span className="text-cyan-400">→</span> Manual, time-wasting tasks
+              </li>
+              <li className="text-sm text-slate-400">
+                <span className="text-cyan-400">→</span> Missed customer messages
+              </li>
+              <li className="text-sm text-slate-400">
+                <span className="text-cyan-400">→</span> Lost sales opportunities
+              </li>
+              <li className="text-sm text-slate-400">
+                <span className="text-cyan-400">→</span> Complex VPS deployment
+              </li>
+              <li className="text-sm text-slate-400">
+                <span className="text-cyan-400">→</span> No automation expertise
+              </li>
             </ul>
           </div>
 
@@ -120,6 +181,29 @@ const Footer = () => {
                   </a>
                 );
               })}
+            </div>
+          </div>
+        </div>
+
+        {/* 100% Guarantee Section */}
+        <div className="border-t border-slate-800 pt-8 mb-8">
+          <div className="bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-xl p-6 border border-cyan-500/30">
+            <h4 className="text-white font-bold text-xl mb-3 text-center">
+              💯 Why Clients Choose Me (100% Reasons)
+            </h4>
+            <div className="grid md:grid-cols-3 gap-4 text-center">
+              <div>
+                <div className="text-2xl font-bold text-cyan-400 mb-1">Fast Delivery</div>
+                <p className="text-sm text-slate-300">Projects completed on time, every time</p>
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-cyan-400 mb-1">Clear Communication</div>
+                <p className="text-sm text-slate-300">Always available, no confusion</p>
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-cyan-400 mb-1">Real Results</div>
+                <p className="text-sm text-slate-300">Solutions that actually work for your business</p>
+              </div>
             </div>
           </div>
         </div>
