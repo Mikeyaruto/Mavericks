@@ -32,12 +32,12 @@ const AnimatedCounter = ({ end, duration = 2000, suffix = '' }) => {
     if (counterRef.current) {
       observer.observe(counterRef.current);
     }
-
-    return () => {
-      if (counterRef.current) {
-        observer.unobserve(counterRef.current);
-      }
-    };
+return () => {
+  const node = counterRef.current;
+  if (node) {
+    observer.unobserve(node);
+  }
+};
   }, [end, duration, hasAnimated]);
 
   return (
