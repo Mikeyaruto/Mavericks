@@ -21,13 +21,12 @@ const ScrollReveal = ({ children, className = '', delay = 0 }) => {
     if (ref.current) {
       observer.observe(ref.current);
     }
-
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, [delay]);
+return () => {
+  const node = ref.current;
+  if (node) {
+    observer.unobserve(node);
+  }
+};
 
   return (
     <div
