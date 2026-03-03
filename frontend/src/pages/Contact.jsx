@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { Mail, Phone, MessageCircle, Send, CheckCircle } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { Card, CardContent } from '../components/ui/card';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -14,16 +18,30 @@ const Contact = () => {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Mock submission - in real implementation, this would send to backend
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: '', email: '', phone: '', service: '', message: '' });
-    }, 3000);
+    setLoading(true);
+    setError('');
+    
+    try {
+      // Send to backend API
+      const response = await axios.post(`${API}/contact`, formData);
+      console.log('Contact form submitted successfully:', response.data);
+      
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        setFormData({ name: '', email: '', phone: '', service: '', message: '' });
+      }, 3000);
+    } catch (err) {
+      console.error('Error submitting form:', err);
+      setError('Failed to send message. Please try emailing me directly.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -33,8 +51,9 @@ const Contact = () => {
   const services = [
     'Shopify Website Design',
     'n8n Automation',
-    'AI Chatbots',
+    'AI Chatbots (MoltBot)',
     'AI Voice Agents',
+    'ClawBot / OpenClaw',
     'VPS Deployment',
     'Meta App Review',
     'NeoLife',
@@ -153,6 +172,11 @@ const Contact = () => {
 
           <Card className="border-slate-200">
             <CardContent className="p-8">
+              {error && (
+                <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+                  {error}
+                </div>
+              )}
               {submitted ? (
                 <div className="text-center py-12">
                   <div className="bg-green-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
